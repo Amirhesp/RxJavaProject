@@ -17,6 +17,9 @@ import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    private Disposable disposable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,5 +58,14 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "All items are emitted!");
             }
         };
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        // don't send events once the activity is destroyed
+        disposable.dispose();
+
+        super.onDestroy();
     }
 }
